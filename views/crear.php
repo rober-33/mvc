@@ -8,7 +8,7 @@
 <body>
     <div class="container mt-5">
         <h1>Crear Nueva Tarea</h1>
-        <form action="" method="post">
+        <form action="index.php?accion=guardar" method="post">
             <div class="mb-3">
                 <label for="titulo" class="form-label">Título</label>
                 <input type="text" class="form-control" id="titulo" name="titulo" required>
@@ -18,6 +18,7 @@
                 <textarea class="form-control" id="descripcion" name="descripcion" rows="3"></textarea>
             </div>
             <button type="submit" class="btn btn-primary">Guardar Tarea</button>
+            <a href= "index.php" class="btn btn-primary">Guardar Tarea</a>
             <a href="index.php" class="btn btn-secondary">Cancelar</a>
         </form>
     </div>

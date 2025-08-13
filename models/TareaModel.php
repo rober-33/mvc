@@ -7,9 +7,11 @@ class TareaModel {
         $this->conn = $db;
     }
 
-    //consultar tareas
+    // Consultar tareas
     public function leer() {
-        $query = "SELECT id, titulo, descripcion, fecha_creacion FROM " . $this->table_name . " ORDER BY fecha_creacion DESC";
+        $query = "SELECT id, titulo, descripcion, fecha_creacion 
+                  FROM " . $this->table_name . " 
+                  ORDER BY fecha_creacion DESC";
 
         $stmt = $this->conn->prepare($query);
         $stmt->execute();
@@ -17,15 +19,49 @@ class TareaModel {
         return $stmt;
     }
 
+    // Crear tarea
+    public function crear($titulo, $descripcion) {
+        $query = "INSERT INTO " . $this->table_name . " 
+                  (titulo, descripcion) 
+                  VALUES (:titulo, :descripcion)";
+
+        $stmt = $this->conn->prepare($query);
+
+        // Limpiar datos
+        $titulo = htmlspecialchars(strip_tags($titulo));
+        $descripcion = htmlspecialchars(strip_tags($descripcion));
+
+        // Bind
+        $stmt->bindParam(":titulo", $titulo);
+        $stmt->bindParam(":descripcion", $descripcion);
+
+        if ($stmt->execute()) {
+            return true;
+        }
+        return false;
+    }
 }
 
+// editar tarea 
+public function leeruno($id){
+    $query ="SELECT titulo, descripcion FROM " , $this->table_name , "WHERE id = ?" 
+     $stmt = $this->conn->prepare($query);
+     $stmt->bindParam(),($id); 
+      $stmt->execute(); 
+
+      $row =$stmt->fetch(PDO: :FETCH_ASSOOC); 
+
+      if ($row){ 
+        return $row; 
 
 
+      }
+       
 
+      return null;
 
+     
 
-
-
-
-
+   
+}
 ?>
