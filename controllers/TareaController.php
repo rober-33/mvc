@@ -1,25 +1,23 @@
 <?php
-require_once 'models/TareaModel.php'; 
-require_once 'config/Database.php'; 
-class TareaController{ 
-    private $db; 
-    private $tareaModel; 
+require_once 'models/TareaModel.php';
+require_once 'config/Database.php';
 
-    public function__construct(){ 
+class TareaController {
+    private $db;
+    private $tareaModel;
 
-        $database =new Database->getconnection(); 
-        $this->TareaModel = new TareaModel($this->db);
-
+    public function __construct() {
+        $database = new Database();
+        $this->db = $database->getConnection();
+        $this->tareaModel = new TareaModel($this->db);
     }
 
-
-    //mostrar todas las tareas
-    public function home (){ 
-    $tareas = $this->tareaModel->leer(); 
-    include 'views/home.php'
+    //mostrar tareas
+    public function home() {
+        $tareas = $this->tareaModel->leer();
+        include 'views/home.php';
     }
 
 }
-
 
 ?>
